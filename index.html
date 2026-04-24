@@ -1,118 +1,632 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - MGGen Games</title>
+    <title>Privacy Policy - MGGEN Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Inter:wght@400;700&family=Kanit:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Itim&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --bg: #ffffff;
-            --text: #1a1a1a;
-            --accent: #007bff;
-            --card-bg: #f8f9fa;
-        }
-        [data-theme="dark"] {
-            --bg: #0b0e14;
-            --text: #e0e0e0;
-            --accent: #00f2ff;
-            --card-bg: #161b22;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: sans-serif;
-            transition: 0.3s;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', 'Tajawal', sans-serif;
+            line-height: 1.7;
+            background: var(--bg-body);
+            color: var(--text-primary);
             padding: 20px;
         }
-        .header {
+
+        /* Font classes for different languages */
+        body[data-lang="ar"] { font-family: 'Tajawal', sans-serif; }
+        body[data-lang="zh-CN"] { font-family: 'ZCOOL KuaiLe', cursive; }
+        body[data-lang="th"] { font-family: 'Itim', cursive; }
+        body[data-lang="ru"] { font-family: 'Roboto Condensed', sans-serif; }
+        body[data-lang="my"] { font-family: 'Kanit', sans-serif; }
+        body[data-lang="es"], body[data-lang="ms"], body[data-lang="ro"], body[data-lang="sr"], 
+        body[data-lang="vi"], body[data-lang="es-419"], body[data-lang="fil"], body[data-lang="id"] {
+            font-family: 'Kanit', sans-serif;
+        }
+
+        /* Dark & Light Mode Variables */
+        :root {
+            --bg-body: #eef2f5;
+            --bg-container: #ffffff;
+            --text-primary: #1e2a3a;
+            --text-secondary: #2c3e50;
+            --border-accent: #6366f1;
+            --card-bg: #f9fafb;
+            --footer-text: #5d6e7e;
+            --btn-bg: #e2e8f0;
+            --btn-icon: #4a5568;
+            --lang-border: #cbd5e1;
+            --contact-bg: #e6f7ff;
+            --flag-bg: #f1f5f9;
+        }
+
+        body.dark {
+            --bg-body: #121826;
+            --bg-container: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e6;
+            --border-accent: #818cf8;
+            --card-bg: #0f172a;
+            --footer-text: #94a3b8;
+            --btn-bg: #334155;
+            --btn-icon: #f1f5f9;
+            --lang-border: #475569;
+            --contact-bg: #1e2a3a;
+            --flag-bg: #1e293b;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 30px auto;
+            background: var(--bg-container);
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            padding: 30px 35px;
+        }
+
+        /* Header Controls */
+        .header-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-        .theme-btn {
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 20px;
-            border: 2px solid var(--accent);
-            background: transparent;
-            color: var(--accent);
-            font-weight: bold;
-        }
-        .lang-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            flex-wrap: wrap;
             gap: 15px;
-            max-width: 800px;
-            margin: 0 auto 40px;
-        }
-        .lang-card {
-            background: var(--card-bg);
-            padding: 15px;
-            text-align: center;
-            border-radius: 12px;
-            border: 1px solid var(--accent);
-            cursor: pointer;
-        }
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        .section {
             margin-bottom: 25px;
-            padding: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--lang-border);
+        }
+
+        .theme-switch {
+            display: flex;
+        }
+
+        .theme-btn {
+            background: var(--btn-bg);
+            border: none;
+            color: var(--btn-icon);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        .theme-btn:hover {
+            transform: scale(0.96);
+            opacity: 0.9;
+        }
+
+        /* Language Selector Dropdown */
+        .lang-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--flag-bg);
+            padding: 5px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--lang-border);
+        }
+
+        .lang-selector label {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .lang-selector select {
+            background: var(--bg-container);
+            color: var(--text-primary);
+            border: 1px solid var(--lang-border);
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            text-align: center;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--border-accent);
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 10px;
+            padding-bottom: 12px;
+        }
+
+        .title-wrapper {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            background: var(--contact-bg);
+            padding: 18px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0 25px;
+            font-size: 0.95rem;
+            border-right: 4px solid var(--border-accent);
+        }
+
+        .contact-info a {
+            color: var(--border-accent);
+            text-decoration: none;
+        }
+
+        /* Content sections */
+        .policy-section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px 0;
+            color: var(--border-accent);
+            border-right: 4px solid var(--border-accent);
+            padding-right: 12px;
+        }
+
+        .policy-text {
             background: var(--card-bg);
-            border-radius: 12px;
+            padding: 18px 22px;
+            border-radius: 20px;
+            line-height: 1.8;
+            border: 1px solid var(--lang-border);
+        }
+
+        hr {
+            margin: 35px 0 15px;
+            border-color: var(--lang-border);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--footer-text);
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+
+        /* Right-to-left support */
+        body[data-dir="rtl"] h2 {
+            border-right: 4px solid var(--border-accent);
+            border-left: none;
+            padding-right: 12px;
+            padding-left: 0;
+            text-align: right;
+        }
+
+        body[data-dir="rtl"] .policy-text {
+            text-align: right;
+            direction: rtl;
+        }
+
+        @media (max-width: 750px) {
+            .container { padding: 20px; }
+            .header-controls { flex-direction: column; align-items: stretch; }
+            .lang-selector { justify-content: space-between; }
         }
     </style>
 </head>
-<body data-theme="dark">
-
-<div class="header">
-    <h1>Privacy Policy</h1>
-    <button class="theme-btn" onclick="toggleTheme()">Dark/Light Mode</button>
-</div>
-
-<div class="lang-grid">
-    <div class="lang-card">🇺🇸 English</div>
-    <div class="lang-card">🇸🇦 العربية</div>
-    <div class="lang-card">🇪🇸 Español</div>
-    <div class="lang-card">🇮🇩 Indonesia</div>
-    <div class="lang-card">🇷🇺 Русский</div>
-    <div class="lang-card">🇨🇳 中文</div>
+<body data-lang="ar" data-dir="rtl">
+<div class="container">
+    <div class="header-controls">
+        <div class="theme-switch">
+            <button class="theme-btn" id="darkModeToggle">
+                <i class="fas fa-moon"></i> <span>داكن / Light</span>
+            </button>
+        </div>
+        <div class="lang-selector">
+            <label><i class="fas fa-globe"></i> اللغة:</label>
+            <select id="languageSelect">
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="es-419">🇲🇽 Español (Latino)</option>
+                <option value="ms">🇲🇾 Bahasa Melayu</option>
+                <option value="ro">🇷🇴 Română</option>
+                <option value="sr">🇷🇸 Srpski</option>
+                <option value="vi">🇻🇳 Tiếng Việt</option>
+                <option value="my">🇲🇲 မြန်မာ</option>
+                <option value="th">🇹🇭 ไทย</option>
+                <option value="fil">🇵🇭 Filipino</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="zh-CN">🇨🇳 中文</option>
+                <option value="id">🇮🇩 Indonesia</option>
+            </select>
+        </div>
     </div>
 
-<div class="content">
-    <div class="section">
-        <h3>1. Information Collection</h3>
-        <p>Our games do not collect any personal data from the users. All gameplay data is stored locally on your device.</p>
+    <div class="title-wrapper">
+        <h1 id="pageTitle">سياسة الخصوصية</h1>
+        <p style="font-size: 1rem; margin-top: 5px;"><strong>MGGEN Games</strong> | <span id="subtitle">جميع التطبيقات والألعاب</span></p>
     </div>
 
-    <div class="section">
-        <h3>2. Third-Party Services (For Safety)</h3>
-        <p>We use third-party providers only for safety and game functionality:</p>
-        <ul>
-            <li><strong>Unity Ads Mediation (LevelPlay):</strong> To provide a better advertising experience and support game development.</li>
-            <li><strong>Device Information:</strong> Non-personal identifiers used for technical stability.</li>
-        </ul>
+    <div class="contact-info">
+        📧 contact: farahat.xbs@gmail.com <br>
+        <span id="lastUpdated" style="font-size: 0.8rem;">آخر تحديث: 29 مارس 2026</span>
     </div>
 
-    <div class="section">
-        <h3>3. Contact Us</h3>
-        <p>If you have any questions, contact us via the official developer email.</p>
+    <!-- Policy Sections -->
+    <div class="policy-section">
+        <h2 id="title1">1. مقدمة</h2>
+        <div class="policy-text" id="text1">
+            نحن في MGGEN نحترم خصوصيتك. توضح هذه السياسة كيف نجمع البيانات ونستخدمها لضمان تجربة لعب آمنة.
+        </div>
     </div>
+
+    <div class="policy-section">
+        <h2 id="title2">2. جمع البيانات</h2>
+        <div class="policy-text" id="text2">
+            نجمع بيانات تقنية مثل Device ID لتحسين الأداء، وبيانات الحساب عبر طرف ثالث آمن لحفظ نتائجك.
+        </div>
+    </div>
+
+    <div class="policy-section">
+        <h2 id="title3">3. الإعلانات</h2>
+        <div class="policy-text" id="text3">
+            تستخدم اللعبة Unity Ads (Mediation) لعرض الإعلانات. قد يقوم المزود بجمع بيانات تقنية لعرض إعلانات ملائمة.
+        </div>
+    </div>
+
+    <div class="policy-section">
+        <h2 id="title4">4. خصوصية الأطفال</h2>
+        <div class="policy-text" id="text4">
+            اللعبة موجهة للجمهور العام. نحن لا نجمع بيانات الأطفال بشكل مخالف للقوانين.
+        </div>
+    </div>
+
+    <div class="policy-section">
+        <h2 id="title5">5. حقوق المستخدم</h2>
+        <div class="policy-text" id="text5">
+            يمكنك طلب حذف بياناتك في أي وقت عبر التواصل معنا عبر البريد الإلكتروني المذكور أعلاه.
+        </div>
+    </div>
+
+    <hr>
+    <footer>
+        &copy; 2026 MGGEN Games - <span id="footerRights">جميع الحقوق محفوظة</span>
+    </footer>
 </div>
 
 <script>
-    function toggleTheme() {
-        const body = document.body;
-        const current = body.getAttribute('data-theme');
-        body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    // Translation database for all 15 languages (exact, no extra words)
+    const translations = {
+        // Arabic
+        ar: {
+            dir: "rtl",
+            title: "سياسة الخصوصية",
+            subtitle: "جميع التطبيقات والألعاب",
+            lastUpdated: "آخر تحديث: 29 مارس 2026",
+            footer: "جميع الحقوق محفوظة",
+            t1: "1. مقدمة",
+            t2: "2. جمع البيانات",
+            t3: "3. الإعلانات",
+            t4: "4. خصوصية الأطفال",
+            t5: "5. حقوق المستخدم",
+            p1: "نحن في MGGEN نحترم خصوصيتك. توضح هذه السياسة كيف نجمع البيانات ونستخدمها لضمان تجربة لعب آمنة.",
+            p2: "نجمع بيانات تقنية مثل Device ID لتحسين الأداء، وبيانات الحساب عبر طرف ثالث آمن لحفظ نتائجك.",
+            p3: "تستخدم اللعبة Unity Ads (Mediation) لعرض الإعلانات. قد يقوم المزود بجمع بيانات تقنية لعرض إعلانات ملائمة.",
+            p4: "اللعبة موجهة للجمهور العام. نحن لا نجمع بيانات الأطفال بشكل مخالف للقوانين.",
+            p5: "يمكنك طلب حذف بياناتك في أي وقت عبر التواصل معنا عبر البريد الإلكتروني المذكور أعلاه."
+        },
+        // English
+        en: {
+            dir: "ltr",
+            title: "Privacy Policy",
+            subtitle: "All Apps & Games",
+            lastUpdated: "Last Updated: March 29, 2026",
+            footer: "All Rights Reserved",
+            t1: "1. Introduction",
+            t2: "2. Data Collection",
+            t3: "3. Advertising",
+            t4: "4. Children's Privacy",
+            t5: "5. Your Rights",
+            p1: "We at MGGEN respect your privacy. This policy explains how we collect and use data to ensure a safe experience.",
+            p2: "We collect technical data such as Device ID for performance, and account data via a secure third party to save your scores.",
+            p3: "The game uses Unity Ads (Mediation). The provider may collect technical data to display relevant ads.",
+            p4: "This game is for a general audience. We do not knowingly collect data from children.",
+            p5: "You can request data deletion at any time by contacting us via the email above."
+        },
+        // Spanish
+        es: {
+            dir: "ltr",
+            title: "Política de Privacidad",
+            subtitle: "Todas las Apps y Juegos",
+            lastUpdated: "Última actualización: 29 de marzo de 2026",
+            footer: "Todos los derechos reservados",
+            t1: "1. Introducción",
+            t2: "2. Recopilación de Datos",
+            t3: "3. Publicidad",
+            t4: "4. Privacidad de los Niños",
+            t5: "5. Sus Derechos",
+            p1: "En MGGEN respetamos su privacidad. Esta política explica cómo recopilamos y usamos datos para garantizar una experiencia segura.",
+            p2: "Recopilamos datos técnicos como ID de dispositivo para rendimiento, y datos de cuenta a través de un tercero seguro para guardar sus puntuaciones.",
+            p3: "El juego usa Unity Ads (Mediación). El proveedor puede recopilar datos técnicos para mostrar anuncios relevantes.",
+            p4: "Este juego es para público general. No recopilamos datos de niños a sabiendas.",
+            p5: "Puede solicitar la eliminación de datos en cualquier momento contactándonos por el correo electrónico mencionado."
+        },
+        // Spanish Latin America
+        "es-419": {
+            dir: "ltr",
+            title: "Política de Privacidad",
+            subtitle: "Todas las Apps y Juegos",
+            lastUpdated: "Última actualización: 29 de marzo de 2026",
+            footer: "Todos los derechos reservados",
+            t1: "1. Introducción",
+            t2: "2. Recopilación de Datos",
+            t3: "3. Publicidad",
+            t4: "4. Privacidad de los Niños",
+            t5: "5. Sus Derechos",
+            p1: "En MGGEN respetamos su privacidad. Esta política explica cómo recopilamos y usamos datos para garantizar una experiencia segura.",
+            p2: "Recopilamos datos técnicos como ID de dispositivo para rendimiento, y datos de cuenta a través de un tercero seguro para guardar sus puntuaciones.",
+            p3: "El juego usa Unity Ads (Mediación). El proveedor puede recopilar datos técnicos para mostrar anuncios relevantes.",
+            p4: "Este juego es para público general. No recopilamos datos de niños a sabiendas.",
+            p5: "Puede solicitar la eliminación de datos en cualquier momento contactándonos por el correo electrónico mencionado."
+        },
+        // Malay
+        ms: {
+            dir: "ltr",
+            title: "Dasar Privasi",
+            subtitle: "Semua Apl & Permainan",
+            lastUpdated: "Kemas Kini Terakhir: 29 Mac 2026",
+            footer: "Hak Cipta Terpelihara",
+            t1: "1. Pengenalan",
+            t2: "2. Pengumpulan Data",
+            t3: "3. Pengiklanan",
+            t4: "4. Privasi Kanak-kanak",
+            t5: "5. Hak Anda",
+            p1: "Kami di MGGEN menghormati privasi anda. Dasar ini menerangkan cara kami mengumpul dan menggunakan data untuk memastikan pengalaman yang selamat.",
+            p2: "Kami mengumpul data teknikal seperti ID Peranti untuk prestasi, dan data akaun melalui pihak ketiga yang selamat untuk menyimpan skor anda.",
+            p3: "Permainan ini menggunakan Unity Ads (Mediasi). Pembekal mungkin mengumpul data teknikal untuk memaparkan iklan yang berkaitan.",
+            p4: "Permainan ini untuk khalayak umum. Kami tidak mengumpul data daripada kanak-kanak dengan sengaja.",
+            p5: "Anda boleh meminta pemadaman data pada bila-bila masa dengan menghubungi kami melalui e-mel di atas."
+        },
+        // Romanian
+        ro: {
+            dir: "ltr",
+            title: "Politica de Confidențialitate",
+            subtitle: "Toate Aplicațiile și Jocurile",
+            lastUpdated: "Ultima actualizare: 29 martie 2026",
+            footer: "Toate drepturile rezervate",
+            t1: "1. Introducere",
+            t2: "2. Colectarea Datelor",
+            t3: "3. Publicitate",
+            t4: "4. Confidențialitatea Copiilor",
+            t5: "5. Drepturile Dumneavoastră",
+            p1: "Noi, la MGGEN, respectăm confidențialitatea dumneavoastră. Această politică explică modul în care colectăm și folosim datele pentru a asigura o experiență sigură.",
+            p2: "Colectăm date tehnice precum ID-ul dispozitivului pentru performanță și datele contului printr-o terță parte sigură pentru a vă salva scorurile.",
+            p3: "Jocul folosește Unity Ads (Mediere). Furnizorul poate colecta date tehnice pentru a afișa reclame relevante.",
+            p4: "Acest joc este destinat publicului larg. Nu colectăm date de la copii în mod intenționat.",
+            p5: "Puteți solicita ștergerea datelor în orice moment contactându-ne prin e-mailul de mai sus."
+        },
+        // Serbian
+        sr: {
+            dir: "ltr",
+            title: "Политика Приватности",
+            subtitle: "Све Апликације и Игре",
+            lastUpdated: "Последње ажурирање: 29. март 2026.",
+            footer: "Сва права задржана",
+            t1: "1. Увод",
+            t2: "2. Прикупљање Података",
+            t3: "3. Оглашавање",
+            t4: "4. Приватност Деце",
+            t5: "5. Ваша Права",
+            p1: "Ми у MGGEN поштујемо вашу приватност. Ова политика објашњава како прикупљамо и користимо податке како бисмо осигурали безбедно искуство.",
+            p2: "Прикупљамо техничке податке као што је ID уређаја за перформансе, и податке о налогу преко безбедне треће стране да бисмо сачували ваше резултате.",
+            p3: "Игра користи Unity Ads (Mediation). Пружалац услуга може прикупљати техничке податке за приказивање релевантних огласа.",
+            p4: "Ова игра је за општу публику. Намерно не прикупљамо податке од деце.",
+            p5: "Можете затражити брисање података у било ком тренутку контактирајући нас путем е-поште изнад."
+        },
+        // Vietnamese
+        vi: {
+            dir: "ltr",
+            title: "Chính Sách Bảo Mật",
+            subtitle: "Tất cả Ứng dụng & Trò chơi",
+            lastUpdated: "Cập nhật lần cuối: 29 tháng 3, 2026",
+            footer: "Đã đăng ký Bản quyền",
+            t1: "1. Giới thiệu",
+            t2: "2. Thu thập Dữ liệu",
+            t3: "3. Quảng cáo",
+            t4: "4. Quyền riêng tư của Trẻ em",
+            t5: "5. Quyền của Bạn",
+            p1: "Chúng tôi tại MGGEN tôn trọng quyền riêng tư của bạn. Chính sách này giải thích cách chúng tôi thu thập và sử dụng dữ liệu để đảm bảo trải nghiệm an toàn.",
+            p2: "Chúng tôi thu thập dữ liệu kỹ thuật như ID thiết bị để cải thiện hiệu suất và dữ liệu tài khoản thông qua bên thứ ba an toàn để lưu điểm số của bạn.",
+            p3: "Trò chơi sử dụng Unity Ads (Mediation). Nhà cung cấp có thể thu thập dữ liệu kỹ thuật để hiển thị quảng cáo phù hợp.",
+            p4: "Trò chơi này dành cho đối tượng chung. Chúng tôi không cố ý thu thập dữ liệu từ trẻ em.",
+            p5: "Bạn có thể yêu cầu xóa dữ liệu bất cứ lúc nào bằng cách liên hệ với chúng tôi qua email ở trên."
+        },
+        // Burmese
+        my: {
+            dir: "ltr",
+            title: "ကိုယ်ရေးအချက်အလက်မူဝါဒ",
+            subtitle: "အက်ပ်များနှင့် ဂိမ်းများအားလုံး",
+            lastUpdated: "နောက်ဆုံးမွမ်းမံသည်: မတ်လ ၂၉၊ ၂၀၂၆",
+            footer: "မူပိုင်ခွင့်များရယူထားသည်",
+            t1: "၁။ နိဒါန်း",
+            t2: "၂။ ဒေတာစုဆောင်းခြင်း",
+            t3: "၃။ ကြော်ငြာများ",
+            t4: "၄။ ကလေးများ၏ကိုယ်ရေးကိုယ်တာ",
+            t5: "၅။ သင်၏အခွင့်အရေးများ",
+            p1: "MGGEN မှ သင့်ကိုယ်ရေးကိုယ်တာအား လေးစားပါသည်။ ဤမူဝါဒသည် ဘေးကင်းသောအတွေ့အကြုံအတွက် ဒေတာစုဆောင်းပုံနှင့် အသုံးပြုပုံကို ရှင်းပြသည်။",
+            p2: "စွမ်းဆောင်ရည်အတွက် Device ID ကဲ့သို့သော နည်းပညာဒေတာနှင့် သင့်ရမှတ်များကိုသိမ်းရန် လုံခြုံသောတတိယပါတီမှတစ်ဆင့် အကောင့်ဒေတာကို စုဆောင်းပါသည်။",
+            p3: "ဂိမ်းသည် Unity Ads (Mediation) ကို အသုံးပြုသည်။ ဝန်ဆောင်မှုပေးသူသည် သင့်လျော်သောကြော်ငြာများပြသရန် နည်းပညာဒေတာကို စုဆောင်းနိုင်ပါသည်။",
+            p4: "ဤဂိမ်းသည် အထွေထွေပရိသတ်အတွက်ဖြစ်သည်။ ကလေးများထံမှ ဒေတာကို သိလျက်နှင့် မစုဆောင်းပါ။",
+            p5: "အထက်ဖော်ပြပါ အီးမေးလ်မှတစ်ဆင့် ကျွန်ုပ်တို့ကို ဆက်သွယ်ခြင်းဖြင့် ဒေတာဖျက်ပစ်ရန် အချိန်မရွေး တောင်းဆိုနိုင်ပါသည်။"
+        },
+        // Thai
+        th: {
+            dir: "ltr",
+            title: "นโยบายความเป็นส่วนตัว",
+            subtitle: "แอปและเกมทั้งหมด",
+            lastUpdated: "อัปเดตล่าสุด: 29 มีนาคม 2026",
+            footer: "สงวนลิขสิทธิ์",
+            t1: "1. บทนำ",
+            t2: "2. การเก็บรวบรวมข้อมูล",
+            t3: "3. การโฆษณา",
+            t4: "4. ความเป็นส่วนตัวของเด็ก",
+            t5: "5. สิทธิ์ของคุณ",
+            p1: "เรา MGGEN เคารพความเป็นส่วนตัวของคุณ นโยบายนี้อธิบายวิธีที่เราเก็บรวบรวมและใช้ข้อมูลเพื่อประสบการณ์ที่ปลอดภัย",
+            p2: "เราเก็บรวบรวมข้อมูลทางเทคนิค เช่น Device ID เพื่อประสิทธิภาพ และข้อมูลบัญชีผ่านบุคคลที่สามที่ปลอดภัยเพื่อบันทึกคะแนนของคุณ",
+            p3: "เกมใช้ Unity Ads (Mediation) ผู้ให้บริการอาจเก็บรวบรวมข้อมูลทางเทคนิคเพื่อแสดงโฆษณาที่เกี่ยวข้อง",
+            p4: "เกมนี้สำหรับผู้ชมทั่วไป เราไม่ได้ตั้งใจเก็บรวบรวมข้อมูลจากเด็ก",
+            p5: "คุณสามารถขอให้ลบข้อมูลได้ตลอดเวลาโดยติดต่อเราผ่านอีเมลด้านบน"
+        },
+        // Filipino
+        fil: {
+            dir: "ltr",
+            title: "Patakaran sa Pagkapribado",
+            subtitle: "Lahat ng Apps at Laro",
+            lastUpdated: "Huling Na-update: Marso 29, 2026",
+            footer: "Nakalaan ang Lahat ng Karapatan",
+            t1: "1. Panimula",
+            t2: "2. Pangongolekta ng Data",
+            t3: "3. Pag-advertise",
+            t4: "4. Pagkapribado ng mga Bata",
+            t5: "5. Iyong mga Karapatan",
+            p1: "Kami sa MGGEN ay iginagalang ang iyong privacy. Ipinapaliwanag ng patakarang ito kung paano kami nangongolekta at gumagamit ng data upang matiyak ang isang ligtas na karanasan.",
+            p2: "Nangongolekta kami ng teknikal na data tulad ng Device ID para sa pagganap, at data ng account sa pamamagitan ng isang secure na third party upang i-save ang iyong mga marka.",
+            p3: "Ang laro ay gumagamit ng Unity Ads (Mediation). Maaaring mangolekta ang provider ng teknikal na data upang magpakita ng mga nauugnay na ad.",
+            p4: "Ang larong ito ay para sa pangkalahatang madla. Hindi namin sinasadyang mangolekta ng data mula sa mga bata.",
+            p5: "Maaari mong hilingin ang pagtanggal ng data anumang oras sa pamamagitan ng pakikipag-ugnay sa amin sa email sa itaas."
+        },
+        // Russian
+        ru: {
+            dir: "ltr",
+            title: "Политика конфиденциальности",
+            subtitle: "Все приложения и игры",
+            lastUpdated: "Последнее обновление: 29 марта 2026 г.",
+            footer: "Все права защищены",
+            t1: "1. Введение",
+            t2: "2. Сбор данных",
+            t3: "3. Реклама",
+            t4: "4. Конфиденциальность детей",
+            t5: "5. Ваши права",
+            p1: "Мы в MGGEN уважаем вашу конфиденциальность. Эта политика объясняет, как мы собираем и используем данные для обеспечения безопасного опыта.",
+            p2: "Мы собираем технические данные, такие как ID устройства, для производительности и данные учетной записи через безопасную третью сторону, чтобы сохранить ваши результаты.",
+            p3: "Игра использует Unity Ads (Mediation). Поставщик может собирать технические данные для показа релевантной рекламы.",
+            p4: "Эта игра предназначена для широкой аудитории. Мы намеренно не собираем данные от детей.",
+            p5: "Вы можете запросить удаление данных в любое время, связавшись с нами по электронной почте выше."
+        },
+        // Chinese
+        "zh-CN": {
+            dir: "ltr",
+            title: "隐私政策",
+            subtitle: "所有应用和游戏",
+            lastUpdated: "最后更新：2026年3月29日",
+            footer: "版权所有",
+            t1: "1. 引言",
+            t2: "2. 数据收集",
+            t3: "3. 广告",
+            t4: "4. 儿童隐私",
+            t5: "5. 您的权利",
+            p1: "我们在MGGEN尊重您的隐私。本政策解释了我们如何收集和使用数据以确保安全的体验。",
+            p2: "我们收集技术数据如设备ID以提高性能，并通过安全的第三方收集账户数据以保存您的分数。",
+            p3: "游戏使用Unity Ads（中介平台）。提供商可能会收集技术数据以展示相关广告。",
+            p4: "本游戏面向普通大众。我们不会故意收集儿童的数据。",
+            p5: "您可以随时通过上述电子邮件与我们联系，请求删除您的数据。"
+        },
+        // Indonesian
+        id: {
+            dir: "ltr",
+            title: "Kebijakan Privasi",
+            subtitle: "Semua Aplikasi & Game",
+            lastUpdated: "Terakhir Diperbarui: 29 Maret 2026",
+            footer: "Hak Cipta Dilindungi",
+            t1: "1. Pendahuluan",
+            t2: "2. Pengumpulan Data",
+            t3: "3. Periklanan",
+            t4: "4. Privasi Anak-anak",
+            t5: "5. Hak Anda",
+            p1: "Kami di MGGEN menghormati privasi Anda. Kebijakan ini menjelaskan cara kami mengumpulkan dan menggunakan data untuk memastikan pengalaman yang aman.",
+            p2: "Kami mengumpulkan data teknis seperti ID Perangkat untuk kinerja, dan data akun melalui pihak ketiga yang aman untuk menyimpan skor Anda.",
+            p3: "Game ini menggunakan Unity Ads (Mediasi). Penyedia dapat mengumpulkan data teknis untuk menampilkan iklan yang relevan.",
+            p4: "Game ini untuk khalayak umum. Kami tidak sengaja mengumpulkan data dari anak-anak.",
+            p5: "Anda dapat meminta penghapusan data kapan saja dengan menghubungi kami melalui email di atas."
+        }
+    };
+
+    let currentLang = "ar";
+
+    function applyLanguage(lang) {
+        const t = translations[lang];
+        if (!t) return;
+        
+        currentLang = lang;
+        document.body.setAttribute("data-lang", lang);
+        document.body.setAttribute("data-dir", t.dir);
+        document.documentElement.setAttribute("dir", t.dir);
+        document.documentElement.setAttribute("lang", lang === "ar" ? "ar" : "en");
+        
+        document.getElementById("pageTitle").innerText = t.title;
+        document.getElementById("subtitle").innerText = t.subtitle;
+        document.getElementById("lastUpdated").innerText = t.lastUpdated;
+        document.getElementById("footerRights").innerText = t.footer;
+        
+        document.getElementById("title1").innerText = t.t1;
+        document.getElementById("title2").innerText = t.t2;
+        document.getElementById("title3").innerText = t.t3;
+        document.getElementById("title4").innerText = t.t4;
+        document.getElementById("title5").innerText = t.t5;
+        
+        document.getElementById("text1").innerText = t.p1;
+        document.getElementById("text2").innerText = t.p2;
+        document.getElementById("text3").innerText = t.p3;
+        document.getElementById("text4").innerText = t.p4;
+        document.getElementById("text5").innerText = t.p5;
+        
+        localStorage.setItem("preferredLang", lang);
+    }
+
+    // Language selector
+    const langSelect = document.getElementById("languageSelect");
+    langSelect.addEventListener("change", (e) => {
+        applyLanguage(e.target.value);
+    });
+
+    // Dark mode toggle
+    const toggleBtn = document.getElementById("darkModeToggle");
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i> <span>فاتح / Light</span>';
+    }
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        let theme = "light";
+        if (document.body.classList.contains("dark")) {
+            theme = "dark";
+            toggleBtn.innerHTML = '<i class="fas fa-sun"></i> <span>فاتح / Light</span>';
+        } else {
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i> <span>داكن / Dark</span>';
+        }
+        localStorage.setItem("theme", theme);
+    });
+
+    // Load saved language
+    const savedLang = localStorage.getItem("preferredLang");
+    if (savedLang && translations[savedLang]) {
+        applyLanguage(savedLang);
+        langSelect.value = savedLang;
+    } else {
+        applyLanguage("ar");
+        langSelect.value = "ar";
     }
 </script>
-
 </body>
 </html>
